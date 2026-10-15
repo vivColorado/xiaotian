@@ -97,4 +97,4 @@ function saveStart(id){const t=entity(id),v=document.getElementById('start-input
 initOverview();save();render();
 
 const priorSettings=settings;
-settings=function(){priorSettings();const panel=document.querySelector('.sheet');if(panel)panel.insertAdjacentHTML('beforeend','<a class="pdf-open" href="assets/xiaotian-source-v29.zip" download="xiaotian-source-v29.zip">下载最新版项目源码 ZIP ↓</a>');};
+settings=function(){priorSettings();const panel=document.querySelector('.sheet');if(panel)panel.insertAdjacentHTML('beforeend','<a class="pdf-open" href="assets/xiaotian-source-v30.zip" download="xiaotian-source-v30.zip">下载最新版项目源码 ZIP ↓</a>');};
