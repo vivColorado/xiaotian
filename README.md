@@ -2,7 +2,7 @@
 
 人生归你，琐碎归我，愿你自在每一天。
 
-面向日常生活的 AI 个人助理交互原型。当前版本为 v28，源代码基于演示站点提交 `7ed9d183d660f72347a34d60e31c886bb64f1085`。
+面向日常生活的 AI 个人助理交互原型。当前版本为 v31。初始导入基于演示站点提交 `7ed9d183d660f72347a34d60e31c886bb64f1085`。
 
 ## 本地运行
 
@@ -17,7 +17,9 @@ python3 -m http.server 8080 --directory dist
 ## 目录
 
 - `dist/`：HTML、CSS、JavaScript 与演示附件，可直接部署到静态服务器。
-- `docs/REQUIREMENTS.md`：需求文档 v0.4，作为当前需求依据。
+- `docs/REQUIREMENTS.md`：需求文档 v0.7，作为当前需求依据。
+- `docs/TASK-DETAIL.md`：任务详情布局与交互设计。
+- `CHANGELOG.md`：版本改动记录。
 - `docs/xiaotian-brief.html`：可离线打开的产品汇报。
 - `dist/assets/`：演示附件与历史下载包。该目录内需求及设计文档属于历史版本。
 
@@ -30,3 +32,4 @@ python3 -m http.server 8080 --directory dist
 ## 版本管理
 
 建议以 main 保存可运行版本，需求修改通过独立分支和 Pull Request 合入。GitHub 仓库管理与现有演示站点发布独立，推送代码不会自动发布站点。
+

@@ -1,0 +1,44 @@
+/* Task detail: progress first, supporting context second. */
+.task-detail-sheet{padding:0 20px calc(12px + env(safe-area-inset-bottom));max-height:94%;scroll-padding-top:80px;overscroll-behavior:contain}
+.task-detail-sheet>.handle{margin:10px auto 6px}
+.task-detail-sheet>.sheetheader{position:sticky;top:0;z-index:2;background:var(--bg);margin:0;padding:8px 0 6px;gap:12px;align-items:flex-start}
+.task-detail-sheet>.sheetheader h3{font-size:21px;line-height:1.45;margin:4px 0;font-weight:650;overflow-wrap:anywhere}
+.task-detail-sheet .close{width:32px;height:32px;min-width:32px;background:transparent;color:var(--sub);font-size:24px;line-height:1}
+.task-detail-view{font-size:13px}
+.task-detail-view .detail-taskmeta{justify-content:flex-start;gap:12px;margin:0 0 20px;font-size:11px;color:var(--sub)}
+.detail-status{display:inline-flex;align-items:center;gap:5px}.detail-status:before{content:'';width:5px;height:5px;border-radius:50%;background:#98a198}
+.detail-status[data-state="done"]{color:#648361}.detail-status[data-state="done"]:before{background:#648361}.detail-status[data-state="wait_user"]{color:#5d7b90}.detail-status[data-state="wait_user"]:before{background:#5d7b90}
+.task-detail-view .latest-task-state{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin:0 0 20px;padding:0 16px;overflow:hidden}
+.task-detail-view .latest-task-state[data-state="done"]{background:var(--card-done);border-color:#dbe5da}
+.task-detail-view .latest-task-state[data-state="wait_user"]{background:var(--card-help);border-color:#d9e3eb}
+.task-detail-view .latest-task-state:is([data-state="paused"],[data-state="cancelled"],[data-state="error"]){background:var(--card-muted)}
+.task-detail-view summary{list-style:none;cursor:pointer;touch-action:manipulation}.task-detail-view summary::-webkit-details-marker{display:none}
+.latest-task-state>summary{display:flex;align-items:center;gap:8px;min-height:53px;font-size:14px;font-weight:600;padding:13px 0}
+.progress-time{font-size:10px;font-weight:400;color:var(--sub);margin-left:auto;white-space:nowrap}
+.detail-chevron{font-size:18px;font-weight:400;color:#879486;display:inline-block;flex:none;line-height:1;transition:transform .15s}
+details[open]>summary>.detail-chevron{transform:rotate(90deg)}
+.latest-progress-body{padding:0 0 17px}.progress-copy,.progress-question>p{font-size:15px;line-height:1.85;overflow-wrap:anywhere;margin:0}
+.progress-question+.progress-question{border-top:1px solid #263e3614;margin-top:18px;padding-top:16px}
+.task-detail-view .confirmation-options{gap:8px;margin-top:14px}.task-detail-view .confirmation-options button{flex:1 1 110px;min-height:42px;background:#ffffffbf;border:1px solid #263e3625;border-radius:9px;font-size:12px;padding:9px 11px;line-height:1.5}
+.task-detail-view .confirmation-options button:active{background:#ffffff}
+.progress-handoff{border-top:1px solid #263e3617;padding-top:16px;margin-top:18px}.progress-label{font-size:11px;color:var(--sub);margin-bottom:7px}.progress-handoff .progress-question>p{font-size:13px}
+.progress-files{margin-top:15px}.task-detail-view .progress-files .file-chip{margin:8px 0 0;background:#ffffff9c;border-color:#263e3614;min-height:48px;border-radius:10px}
+.progress-caveat{font-size:11px;color:var(--sub);margin:12px 0 0;line-height:1.7}
+.detail-inline-action{display:flex;align-items:center;gap:7px;min-height:40px;margin-top:12px;font-size:12px;color:var(--green);padding:0}.detail-inline-action svg{width:15px;height:15px}
+.detail-context{border-top:1px solid var(--line)}.task-detail-view .detail-fold{border-bottom:1px solid var(--line)}
+.task-detail-view .detail-fold>summary{display:flex;align-items:center;gap:10px;min-height:43px;padding:10px 0;font-size:12px;font-weight:400;color:#7c877c}
+.context-hint{font-size:10px;color:#8c958b;margin-left:auto}.task-detail-view .detail-fold>summary .detail-chevron{font-size:15px}
+.task-detail-view .detail-section{padding:0 0 16px;border:0}.task-detail-view .request-block{padding:0 0 18px;margin:0;background:transparent;border-radius:0}
+.task-detail-view .request-time{margin:3px 0 9px}.task-detail-view .request-block p{font-size:13px;line-height:1.85;margin:0;color:#637162;white-space:pre-wrap;overflow-wrap:anywhere}
+.task-detail-view .request-updates{margin-top:18px}.task-detail-view h4{font-size:11px;font-weight:500;color:var(--sub);margin:0 0 9px}
+.task-detail-view .request-updates p{margin:12px 0}.task-detail-view .request-updates small{display:block;color:var(--sub);font-size:10px;margin-top:4px}
+.task-detail-view .detail-fold .detail-section>h3{display:none}.task-detail-view .symbol-legend{font-size:9px;margin:2px 0 5px;gap:12px;color:#899286}
+.task-detail-view .plan-row{padding:12px 0;grid-template-columns:20px 1fr;gap:8px}.task-detail-view .plan-row strong{font-size:12px;font-weight:500}.task-detail-view .plan-row p{font-size:11px;margin:4px 0}.task-detail-view .plan-times{font-size:9px;line-height:1.7}
+.detail-history{padding-bottom:12px}.history-entry{font-size:12px;border-left:2px solid var(--line);padding-left:11px;margin:12px 0}.history-entry p{margin:4px 0;line-height:1.8;color:var(--sub)}.history-entry .history-answer{color:#637162}.history-entry small{font-size:9px;color:var(--sub)}
+.task-detail-view .full-execution{font-size:11px;padding:10px 0 16px;border:0;color:var(--sub)}
+.detail-management{margin-top:8px}.detail-management>summary{display:flex;align-items:center;gap:7px;width:100%;min-height:40px;font-size:11px;color:#899286}.detail-management .detail-chevron{font-size:14px}.detail-management .control-row{margin:0 0 12px;gap:8px}.detail-management .control-row button{font-size:11px;background:#edf0e9;min-height:38px}
+.detail-demo-note{font-size:9px;color:#98a093;margin:0 0 10px}
+.detail-actions{position:sticky;bottom:calc(-12px - env(safe-area-inset-bottom));display:flex;gap:9px;padding:10px 0 calc(12px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);z-index:1}
+.detail-actions button{flex:1;min-height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px}.detail-supplement{background:#e9eee5;color:var(--green)}.detail-supplement svg{height:15px;width:15px}.detail-resume{background:var(--green);color:white}
+.task-detail-view summary:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:5px}
+@media(max-width:360px){.task-detail-sheet{padding-left:16px;padding-right:16px}.task-detail-sheet>.sheetheader h3{font-size:19px}.task-detail-view .latest-task-state{padding:0 13px}.progress-copy,.progress-question>p{font-size:14px}}
