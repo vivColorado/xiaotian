@@ -1,7 +1,7 @@
 /* Three immutable receipt snapshots; every receipt opens the same live task. */
 const SHOP_STORY_REQUEST='家里牛奶和小包吃的菜没有了，参考常买的帮我加购，优惠帮我用上。';
 const SHOP_STORY_REPLY='可以换同品牌 950mL 的，蔬菜按两天的量准备，先加购物车，不要付款。';
-function initShoppingStory(){if(S.v25)return;const t=item('shop');if(!t)return;const date=new Date(Date.now()+28800000).toISOString().slice(0,10),at=time=>date+'T'+time;
+function initShoppingStory(){if(S.v25)return;const t=item('shop');if(!t)return;const date=new Date(now().getTime()+28800000).toISOString().slice(0,10),at=time=>date+'T'+time;
 S.shoppingStory={date,cards:[{key:'created',label:'已创建',at:'09:00',text:'已接下：核对常购清单与优惠，再为您加购。'},{key:'assist',label:'需您协助',at:'09:03',text:'常买牛奶缺货，可换同品牌 950mL 吗？蔬菜准备几天的量？'},{key:'done',label:'已完成',at:'09:07',text:'已按补充要求加购 5 件商品，优惠后 ¥105。未下单、未付款。'}]};
 // Keep prior history in storage; replace only the old automatic demo receipts in the visible example.
 S.messages.forEach(m=>{if(m.id==='shop'&&!m.input)m.supersededShoppingExample=true;});

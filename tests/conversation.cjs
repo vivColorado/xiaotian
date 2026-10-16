@@ -8,7 +8,7 @@ function node(id){
 const timers=new Map();let timerId=0;
 const c={console,Date,Math,JSON,Map,Set,Blob,URL,structuredClone,localStorage:{getItem(){return null},setItem(){}},window:{},navigator:{},document:{getElementById:node,querySelector:s=>s==='.app'?node('app'):s==='.top'?node('top'):null,querySelectorAll(){return []},addEventListener(){},documentElement:node('root'),createElement:()=>node('tmp')},setTimeout:(f,d)=>{timers.set(++timerId,{f,d});return timerId},clearTimeout:id=>timers.delete(id),setInterval:(f,d)=>{timers.set(++timerId,{f,d});return timerId},clearInterval:id=>timers.delete(id),cancelAnimationFrame(){},requestAnimationFrame:()=>0};
 vm.createContext(c);
-for(const file of ['seed','app','overview','workbench','calendar','story','floating','conversation'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/'+file+'.js'),'utf8'),c,{filename:file+'.js'});
+for(const file of ['seed','app','overview','workbench','calendar','story','floating','conversation','delivery'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/'+file+'.js'),'utf8'),c,{filename:file+'.js'});
 const run=s=>vm.runInContext(s,c),main=node('main');
 run("go('home')");
 let html=main.innerHTML;

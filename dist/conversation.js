@@ -44,6 +44,7 @@ home=function(){
  S.messages.forEach((m,i)=>{if(m.supersededShoppingExample)return;(m.conversationHistory?earlier:current).push([m,i]);});
  return `<div class="conversation-view" aria-label="与小天的会话">
  <div class="chat-greeting">${icon('spark')}<p>有什么事，直接吩咐我就好。</p></div>
+ ${typeof deliveryControls==='function'?deliveryControls():''}
  ${earlier.length?`<details class="chat-history" data-chat-history><summary>更早的记录 <span>${earlier.length} 条 <i>⌄</i></span></summary><div>${earlier.map(([m,i])=>conversationMessage(m,i)).join('')}</div></details>`:''}
  ${conversationStory()}${current.map(([m,i])=>conversationMessage(m,i)).join('')}
  <p class="chat-endnote">任务与语音为模拟演示</p></div>`;
@@ -54,10 +55,12 @@ function captureConversationView(){
  chatView.y=main.scrollTop;chatView.atEnd=main.scrollHeight-main.clientHeight-main.scrollTop<72;chatView.visited=true;
  main.querySelectorAll('.batch-bundle').forEach(el=>chatView.folds.set(el.dataset.batch,{open:el.open,y:el.querySelector('.batch-grid')?.scrollTop||0}));
  const history=main.querySelector('[data-chat-history]');if(history)chatView.history=history.open;
+ main.querySelectorAll('[data-chat-fold]').forEach(el=>chatView.folds.set(el.dataset.chatFold,{open:el.open}));
 }
 function restoreConversationView(){
  const main=document.getElementById('main');if(S.page!=='home')return;
  const history=main.querySelector('[data-chat-history]');if(history)history.open=chatView.history;
+ main.querySelectorAll('[data-chat-fold]').forEach(el=>{const state=chatView.folds.get(el.dataset.chatFold);if(state)el.open=state.open;});
  main.querySelectorAll('.batch-bundle').forEach(el=>{const state=chatView.folds.get(el.dataset.batch);if(state){el.open=state.open;const grid=el.querySelector('.batch-grid');if(grid)grid.scrollTop=state.y;}});
  main.scrollTop=chatView.visited&&chatView.atEnd?main.scrollHeight:chatView.y;
  syncConversationJump();
