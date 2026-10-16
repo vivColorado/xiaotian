@@ -1,12 +1,6 @@
 /* Delivery lifecycle and reminder semantics with controlled time and mocked DOM. */
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
-function environment(saved=null){
- const nodes=new Map(),listeners={},windowListeners={},timers=new Map();let timerId=0,stored=saved;
- function node(id){if(!nodes.has(id))nodes.set(id,{innerHTML:'',value:'',dataset:{},style:{setProperty(){}},classList:{add(){}},scrollTop:0,scrollHeight:2400,clientHeight:600,clientWidth:390,offsetHeight:0,events:{},addEventListener(k,f){(this.events[k]||=[]).push(f)},setAttribute(k,v){this[k]=v},focus(){},querySelector(){return null},querySelectorAll(){return []},getBoundingClientRect(){return {top:0,left:0,height:800,width:390}},insertAdjacentHTML(where,html){this.innerHTML+=html},remove(){nodes.delete(id)}});return nodes.get(id);}
- const c={console,Date,Math,JSON,Map,Set,Blob,URL,structuredClone,localStorage:{getItem(){return stored},setItem(k,v){stored=v}},window:{addEventListener(k,f){(windowListeners[k]||=[]).push(f)}},navigator:{},document:{visibilityState:'visible',getElementById:node,querySelector:s=>s==='.app'?node('app'):s==='.top'?node('top'):null,querySelectorAll(){return []},addEventListener(k,f){(listeners[k]||=[]).push(f)},documentElement:node('root'),createElement:()=>node('tmp')},setTimeout:(f,d)=>{timers.set(++timerId,{f,d});return timerId},clearTimeout:id=>timers.delete(id),setInterval:(f,d)=>{timers.set(++timerId,{f,d});return timerId},clearInterval:id=>timers.delete(id),cancelAnimationFrame(){},requestAnimationFrame:()=>0};vm.createContext(c);
- for(const file of ['seed','app','overview','workbench','calendar','story','floating','conversation','delivery'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/'+file+'.js'),'utf8'),c,{filename:file+'.js'});
- return {run:s=>vm.runInContext(s,c),node,c,listeners,windowListeners,get saved(){return stored}};
-}
+const {environment}=require('./environment.cjs');
 let env=environment(),{run,node,c}=env;
 assert.equal(run("now().toISOString().slice(0,10)"),'2026-10-15');assert.equal(run('S.shoppingStory.date'),'2026-10-15');
 assert(run('workTimeline()').includes('10 / 15 · 今天'));

@@ -1,0 +1,38 @@
+.outing-entry{display:flex;gap:12px;padding:17px 14px;background:#edf0e5;border:1px solid #e1e6d6;border-radius:18px;margin:5px 0 14px}
+.outing-entry-icon{display:grid;place-items:center;flex-shrink:0;width:34px;height:34px;border:1px solid #cbd5bc;border-radius:50%;color:#8b9c78}
+.outing-entry-icon svg{width:19px;height:19px}.outing-entry>div{min-width:0;flex:1}
+.outing-entry small{font-size:9px;color:#93a080}.outing-entry b{display:block;font-size:13px;font-weight:550;margin:3px 0}
+.outing-entry p{font-size:10px;color:#98a28d;margin:3px 0 10px}
+.outing-entry-actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.outing-entry-actions button{font-size:11px;padding:0;color:#617c52;min-height:26px}.outing-entry-actions button+button{font-size:10px;color:#96a186}
+.outing-scene{margin-top:26px}.outing-scene-time{font-size:9px;color:#a6af9a;margin-bottom:14px;display:flex;gap:8px;align-items:center}.outing-scene-time:after{content:"";height:1px;flex:1;background:#e2e6da}.outing-scene-time span{font-size:8px;color:#b0b6a5}
+.outing-card-label{display:flex;gap:6px;align-items:center;font-size:10px;color:#8b9a7b}.outing-card-label svg{width:14px;height:14px}.outing-card-label small{margin-left:auto;font-size:8px}
+.outing-plan{background:#fffef9;border:1px solid #e0e5d5;border-radius:15px;padding:15px;margin:12px 0}
+.outing-plan h3{font-size:14px;margin:10px 0 14px}.outing-plan ol{list-style:none;padding:0;margin:0}
+.outing-plan li{display:flex;gap:11px;margin-top:0}.outing-plan li time{font-size:10px;width:32px;flex-shrink:0;padding-top:1px;color:#8b9b7a}
+.outing-plan li>div{border-left:1px solid #e0e5d6;padding:0 0 14px 13px;position:relative}.outing-plan li>div:before{content:"";width:5px;height:5px;border-radius:50%;background:#b2bf9c;position:absolute;left:-3px;top:7px}
+.outing-plan li b{font-size:12px;font-weight:550}.outing-plan li p{font-size:10px!important;line-height:1.85;color:#929e83;margin:4px 0!important}.outing-plan li:last-child>div{padding-bottom:0}
+.outing-plan .outing-sim-note{border-top:1px solid #e6e9dd;font-size:9px!important;line-height:1.85;padding-top:10px;margin:10px 0 0!important;color:#a0a893}
+.outing-pack{background:#f4f1e7;border:1px solid #e9e1ce;border-radius:15px;padding:14px;margin:10px 0}
+.outing-pack>div:nth-child(2){display:grid;grid-template-columns:1fr 1fr;gap:10px 5px;margin:15px 0}
+.outing-pack label{display:flex;gap:7px;align-items:flex-start;font-size:11px;color:#8f8c71;line-height:1.7}
+.outing-pack input{accent-color:#8d9e76;margin:3px 0 0;width:15px;height:15px;flex-shrink:0}.outing-pack input:checked+span{text-decoration:line-through;color:#b0ad97}
+.outing-pack>p{font-size:9px!important;color:#aaa58e;line-height:1.8;border-top:1px solid #e4dfcc;padding-top:9px}
+.outing-route{display:flex;gap:10px;align-items:center;border:1px solid #dee5d3;background:#f5f7ee;border-radius:14px;padding:14px;margin:12px 0}
+.outing-route>svg{width:20px;height:20px;color:#8b9e78}.outing-route>div{flex:1}.outing-route small{display:block;font-size:9px;color:#9caa8a}.outing-route b{font-size:12px;font-weight:550;display:block;margin-top:2px}.outing-route>span{color:#a3b18f;font-size:13px}
+.outing-user-photo{margin:0 0 4px auto;width:74%;background:#eee9d8;border-radius:15px 15px 3px 15px;padding:5px;overflow:hidden}.outing-user-photo img{width:100%;border-radius:11px 11px 3px 3px;display:block}.outing-user-photo figcaption{font-size:8px;color:#a6a18b;text-align:right;padding:3px 4px 0}
+.outing-restaurants{border:1px solid #e2e6d7;border-radius:14px;background:#fffef9;padding:0 13px;margin:12px 0}
+.outing-restaurants>button{display:flex;width:100%;gap:9px;align-items:center;text-align:left;padding:13px 0;border-bottom:1px solid #e4e8dc}.outing-restaurants>button:last-child{border:0}
+.outing-restaurants>button>span{background:#eef1e6;display:grid;place-items:center;width:31px;height:38px;border-radius:8px;color:#9cac88;flex-shrink:0}.outing-restaurants svg{width:17px}
+.outing-restaurants>button>div{flex:1}.outing-restaurants b{font-size:12px;font-weight:550}.outing-restaurants b small{font-weight:400;margin-left:5px;font-size:8px}.outing-restaurants p{font-size:10px!important;color:#839176;margin:3px 0!important}.outing-restaurants small{font-size:8px;color:#a4ad96}.outing-restaurants em{font-size:11px;font-style:normal;color:#98a788}
+.outing-coupon{display:flex;gap:10px;align-items:center;border:1px dashed #d7dec8;border-radius:12px;padding:11px;background:#f4f5eb}
+.outing-coupon>span{font:27px Georgia,serif;color:#8d9d70}.outing-coupon>div{flex:1}.outing-coupon b{font-size:11px;font-weight:550}.outing-coupon p{font-size:9px!important;color:#9ca88d;margin:2px 0!important}.outing-coupon button{font-size:10px;background:#e8eddc;border-radius:8px;padding:7px;color:#7d9066}
+.outing-bill{padding:15px;background:#f4f7f8;border:1px solid #dce6ea;border-radius:14px;margin:12px 0}
+.outing-bill dl{font-size:11px;margin:13px 0}.outing-bill dl>div{display:flex;justify-content:space-between;margin-top:9px}.outing-bill dd{margin:0}.outing-bill dl>div:last-child{border-top:1px solid #dce5e5;padding-top:10px;font-weight:600;font-size:13px}.outing-bill>p{font-size:9px!important;color:#8c9da0}
+.outing-payment-result{display:flex;gap:8px;align-items:center;background:#edf3e9;border:1px solid #dae5d4;padding:12px;border-radius:12px;margin:12px 0}.outing-payment-result svg{width:17px;color:#8aa47a}.outing-payment-result b{display:block;font-size:12px;font-weight:550}.outing-payment-result small{display:block;font-size:9px;color:#9ba992;margin-top:3px}
+.outing-memory{display:flex;align-items:stretch;overflow:hidden;border:1px solid #dfe4d3;border-radius:15px;background:#f0f2e7;padding:0;margin:13px 0;width:100%;text-align:left}
+.outing-memory>img{width:34%;min-height:135px;object-fit:cover}.outing-memory>span{padding:15px 12px;flex:1;min-width:0}.outing-memory small{font-size:8px;color:#96a182}.outing-memory b{display:block;font-size:13px;line-height:1.6;margin:6px 0}.outing-memory em{display:block;font-size:9px;color:#8c9a78;font-style:normal;line-height:1.8}.outing-memory strong{font-size:10px;color:#6b8258;font-weight:500;display:block;margin-top:12px}
+.outing-next{margin:13px 0 7px;padding-top:10px;border-top:1px dashed #dce3d2}
+.outing-next>small{display:block;color:#a3ad95;font-size:8px;margin-bottom:7px}
+.outing-next>button{background:#e9eedf;border:1px solid #dce5ce;border-radius:12px;padding:10px 12px;font-size:11px;line-height:1.7;color:#6a8055;text-align:left;max-width:100%}
+.outing-next>.outing-self-pay{display:block;background:none;border:0;color:#9ca78e;font-size:10px;padding:8px 0 0}

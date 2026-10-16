@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560">
+ <defs><pattern id="grain" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".6" fill="#827657" opacity=".14"/></pattern><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#ecebdc"/><stop offset="1" stop-color="#f3e9cf"/></linearGradient></defs>
+ <path fill="url(#sky)" d="M0 0h800v560H0z"/><circle cx="637" cy="104" r="49" fill="#dfb77b" opacity=".8"/>
+ <path d="M0 210Q170 110 355 214T800 182V560H0" fill="#bdc7a9"/>
+ <path d="M0 278Q155 221 358 290T800 250V560H0" fill="#879a73"/>
+ <path d="M0 380 800 260V560H0" fill="#c8b38c"/>
+ <g fill="none" stroke="#a98d67" stroke-width="11" opacity=".6"><path d="m-100 513 900-205M50 600l750-226M331 600l469-161"/></g>
+ <g fill="#687d56"><path d="M83 430q-49-65 2-40 22-54 18 14 55-39 20 16Z"/><path d="M211 479q-49-65 2-40 22-54 18 14 55-39 20 16Z"/><path d="M652 366q-49-65 2-40 22-54 18 14 55-39 20 16Z"/><path d="M708 494q-49-65 2-40 22-54 18 14 55-39 20 16Z"/></g>
+ <g transform="translate(397 270) rotate(-7)"><path d="m7 120-19 80 29 2 25-75m27-6 17 80 26-4-7-93" stroke="#596b63" stroke-width="19" stroke-linecap="round"/><path d="M-5 40q57-36 100 8l10 87-117 2Z" fill="#e3bb78"/><path d="m6 60-55 61m129-66 42 38" stroke="#e3bb78" stroke-width="28" stroke-linecap="round"/><circle cx="42" cy="16" r="31" fill="#e9c19d"/><path d="M9 10q1-51 53-36L76 5Z" fill="#5b5144"/><path d="M-12-7q46-27 96 3" fill="none" stroke="#e2d8b5" stroke-width="19" stroke-linecap="round"/></g>
+ <g transform="translate(529 358) rotate(10)"><path d="m-1 62-5 57 22 1 12-55m11-4 18 52 19-8-14-57" stroke="#536e70" stroke-width="13" stroke-linecap="round"/><path d="M-12 17q39-19 71 4l8 54-80-2Z" fill="#a4b7b0"/><path d="m-4 29-29 24m83-24 22 10" stroke="#a4b7b0" stroke-width="19" stroke-linecap="round"/><circle cx="23" cy="-1" r="24" fill="#e5bc94"/><path d="M-1-5q-4-31 34-26L49-8" fill="#5b5144"/><path d="M-11-18q38-18 64 6" fill="none" stroke="#d2a16e" stroke-width="15" stroke-linecap="round"/><circle cx="13" cy="6" r="3" fill="#ac845e"/><circle cx="39" cy="4" r="3" fill="#ac845e"/></g>
+ <g transform="translate(300 460) rotate(-18)"><path d="M0 0q45-18 61 8t-42 19Q-5 25 0 0" fill="#a77564"/><path d="m52 3 24-17" stroke="#6d8054" stroke-width="3"/></g>
+ <path fill="url(#grain)" d="M0 0h800v560H0z"/>
+</svg>

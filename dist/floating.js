@@ -16,4 +16,4 @@ mountVoice();
 
 const goBeforeDock=go;
 go=function(page){pageDockOpen=false;goBeforeDock(page);};
-document.addEventListener('click',e=>{if(!pageDockOpen||e.target.closest('.page-fab'))return;pageDockOpen=false;const el=document.querySelector('.page-fab');if(el){el.classList.remove('is-open');el.setAttribute('aria-expanded','false');el.setAttribute('aria-label','展开页面切换');}});
+document.addEventListener('click',e=>{if(!pageDockOpen||e.target.closest('.page-fab,.page-dock-menu'))return;pageDockOpen=false;document.getElementById('page-dock-menu')?.remove();const el=document.querySelector('.page-fab');if(el){el.classList.remove('is-open');el.setAttribute('aria-expanded','false');el.setAttribute('aria-label','展开页面切换');}});
