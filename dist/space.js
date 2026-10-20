@@ -164,3 +164,103 @@ function exportPersonalSpace(){
 }
 initPersonalSpace();
 render();
+
+
+/* v35: knowledge base, personal dashboards and on-demand apps. */
+const __legacyInitPersonalSpaceV34 = initPersonalSpace;
+const V35_KB_SEED = [
+ {id:'kb-1',type:'link',title:'个人 AI 助理的记忆机制',meta:'文章 · 2026-10-15',tags:['个人助理','记忆'],desc:'记忆需要可查看、可纠正，并能回到具体事项。'},
+ {id:'kb-2',type:'doc',title:'周末天津亲子出行攻略',meta:'文档 · 2026-10-10',tags:['出行','小包'],desc:'路线、停车、喂海鸥和返程安排已整理成一页。'},
+ {id:'kb-3',type:'ai',title:'婚礼筹备预算草案',meta:'AI 产出 · 2026-10-12',tags:['婚礼','项目'],desc:'场地、摄影、礼服、宾客与预算的第一版拆解。'},
+ {id:'kb-4',type:'link',title:'具身智能 · 本周观察',meta:'链接 · 2026-10-14',tags:['学习','科技'],desc:'持续追踪能力进展、真实场景与局限。'}
+];
+const V35_APPS_SEED = [
+ {id:'wedding',title:'婚礼筹备',icon:'heart',desc:'把重要的一天，拆成可推进的计划。',status:'规划中',progress:42,budget:'¥86,000',items:['确定婚礼场地','整理宾客名单','比较摄影摄像方案']},
+ {id:'travel',title:'亲子出行',icon:'pin',desc:'行程、资料、预算和沿途记录放在一起。',status:'准备中',progress:68,budget:'¥3,200',items:['确认天津往返路线','准备儿童零食和水','整理沿途照片']}
+];
+function initPersonalSpace(){
+ __legacyInitPersonalSpaceV34();
+ const p=S.personalSpace||{};
+ if(!p.v35){
+  p.v35={kb:V35_KB_SEED.map(function(x){return Object.assign({},x,{tags:x.tags.slice()});}),kbFilter:'全部',kbQuery:'',dashFilter:'all',apps:V35_APPS_SEED.map(function(x){return Object.assign({},x,{items:x.items.slice()});})};
+ }else{
+  p.v35.kb=p.v35.kb||V35_KB_SEED.map(function(x){return Object.assign({},x,{tags:x.tags.slice()});});
+  p.v35.apps=p.v35.apps||V35_APPS_SEED.map(function(x){return Object.assign({},x,{items:x.items.slice()});});
+  p.v35.kbFilter=p.v35.kbFilter||'全部'; p.v35.kbQuery=p.v35.kbQuery||''; p.v35.dashFilter=p.v35.dashFilter||'all';
+ }
+ if(!['overview','knowledge','dashboard','apps'].includes(p.tab))p.tab='overview';
+ save();
+}
+function setSpaceTab(tab){
+ if(!['overview','knowledge','dashboard','apps'].includes(tab))return;
+ ps().tab=tab;save();render();
+ var main=document.getElementById('main');if(main)main.scrollTop=0;
+}
+function v35TabButton(id,label,iconName){
+ return '<button class="space-v35-tab '+(ps().tab===id?'selected':'')+'" aria-pressed="'+(ps().tab===id)+'" onclick="setSpaceTab(\\''+id+'\\')">'+icon(iconName)+ '<span>'+label+'</span></button>';
+}
+function spaceTabs(){
+ return '<nav class="space-v35-tabs" aria-label="个人空间分类">'+v35TabButton('overview','总览','sun')+v35TabButton('knowledge','知识库','book')+v35TabButton('dashboard','个人看板','leaf')+v35TabButton('apps','个性化应用','plus')+'</nav>';
+}
+function v35Section(kicker,title,action){
+ return '<div class="space-v35-section-head"><div><span>'+kicker+'</span><h2>'+title+'</h2></div>'+(action||'')+'</div>';
+}
+function v35TypeLabel(type){return type==='link'?'链接':type==='doc'?'文档':'AI 产出';}
+function v35KnowledgeCards(){
+ var p=ps().v35,q=(p.kbQuery||'').trim().toLowerCase(),f=p.kbFilter||'全部';
+ var rows=p.kb.filter(function(x){return (f==='全部'||v35TypeLabel(x.type)===f||x.tags.includes(f))&&(!q||(x.title+' '+x.desc+' '+x.tags.join(' ')).toLowerCase().includes(q));});
+ if(!rows.length)return '<div class="space-v35-empty">还没有匹配内容，换个关键词试试。</div>';
+ return '<div class="space-v35-kb-grid">'+rows.map(function(x){return '<button class="space-v35-kb-card" onclick="openKnowledgeItemV35(\\''+x.id+'\\')"><div class="space-v35-kb-top"><span class="space-v35-type '+x.type+'">'+v35TypeLabel(x.type)+'</span><small>'+esc(x.meta)+'</small></div><h3>'+esc(x.title)+'</h3><p>'+esc(x.desc)+'</p><div class="space-v35-tags">'+x.tags.map(function(t){return '<em>'+esc(t)+'</em>';}).join('')+'</div><span class="space-v35-card-link">查看内容 ↗</span></button>';}).join('')+'</div>';
+}
+function spaceKnowledgeV35(){
+ var p=ps().v35;
+ return '<div class="space-v35-intro"><span>YOUR SECOND BRAIN</span><h1>发过的内容，<br>都能找到。</h1><p>链接、文档和 AI 产出会自动归到主题、项目和任务里。</p></div>'+v35Section('COLLECTED FOR YOU','个人知识库','<button class="space-v35-action" onclick="addKnowledgeItemV35()">＋ 收进来</button>')+'<div class="space-v35-search"><span>⌕</span><input value="'+esc(p.kbQuery||'')+'" placeholder="搜索标题、主题或任务" oninput="updateSpaceKBQuery(this.value)"></div><div class="space-v35-filters">'+['全部','链接','文档','AI 产出','个人助理','出行','项目','学习'].map(function(f){return '<button class="'+(p.kbFilter===f?'selected':'')+'" onclick="setSpaceKBFilter(\\''+f+'\\')">'+f+'</button>';}).join('')+'</div>'+v35KnowledgeCards()+'<p class="space-v35-caption">示例资料可公开展示，也可以替换成自己的链接和文件。</p>';
+}
+function updateSpaceKBQuery(v){ps().v35.kbQuery=v;save();render();}
+function setSpaceKBFilter(v){ps().v35.kbFilter=v;save();render();}
+function openKnowledgeItemV35(id){
+ var x=ps().v35.kb.find(function(v){return v.id===id});if(!x)return;
+ sheet(x.title,'<div class="space-v35-kb-detail"><div class="space-v35-type '+x.type+'">'+v35TypeLabel(x.type)+'</div><p>'+esc(x.desc)+'</p><div class="space-v35-detail-meta">'+x.tags.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div><button class="primary wide" onclick="closeModal();setSpaceTab(\\'knowledge\\')">回到知识库</button></div>');
+}
+function addKnowledgeItemV35(){
+ var title=window.prompt('记一条知识库内容的标题','今天的新想法');if(!title)return;
+ ps().v35.kb.unshift({id:'kb-'+Date.now(),type:'ai',title:title,meta:'刚刚收进来',tags:['随手记'],desc:'由你刚刚补充，之后可以继续归到主题、项目或任务。'});save();render();toast('已收进个人知识库。');
+}
+function v35MetricCard(id,title,value,unit,desc){
+ return '<button class="space-v35-metric" onclick="openSpaceApp(\\''+id+'\\')"><div><span>'+esc(title)+'</span><small>进入应用 ↗</small></div><strong>'+esc(String(value))+'<em>'+esc(unit||'')+'</em></strong><p>'+esc(desc)+'</p></button>';
+}
+function spaceDashboardV35(){
+ var glucose=spaceRecords('glucose'),weight=spaceRecords('weight'),growth=spaceRecords('growth'),reads=spaceRecords('reading'),places=[].concat(new Set(ps().records.map(function(r){return r.place;}).filter(Boolean)));
+ var lg=glucose[0],lw=weight[0],gh=growth[0];
+ return '<div class="space-v35-intro"><span>YOUR LIFE, IN VIEW</span><h1>把随口记录的，<br>变成看得见的变化。</h1><p>体重、血糖、足迹和灵光一现，都可以长成自己的图表和应用。</p></div>'+v35Section('PERSONAL SIGNALS','我的看板','<button class="space-v35-action" onclick="quickNoteV35()">＋ 随口记</button>')+'<div class="space-v35-metrics">'+v35MetricCard('weight','体重',lw&&lw.values?lw.values[0]:'—','kg','看见缓慢的改变')+v35MetricCard('glucose','血糖',lg&&lg.values?lg.values[0]:'—','mmol/L','记录每一次测量')+v35MetricCard('growth','小包身高',gh&&gh.values?gh.values[0]:'—','cm','每一厘米都值得记住')+'</div><div class="space-v35-chart-row"><button class="space-v35-chart" onclick="setSpaceTab(\\'life\\')"><div><span>生活足迹</span><strong>'+places.length+' 处</strong></div><div class="space-v35-bars">'+[42,68,54,82,63,91].map(function(n){return '<i style="height:'+n+'%"></i>';}).join('')+'</div><small>点击回到生活留痕 ↗</small></button><button class="space-v35-chart" onclick="openSpaceApp(\\'reading\\')"><div><span>学习与追踪</span><strong>'+reads.length+' 条</strong></div><p>论文、科技新闻和自己的问题，会慢慢连成一条线。</p><small>打开阅读应用 ↗</small></button></div><p class="space-v35-caption">看板中的数值是可编辑的示例记录，点击卡片进入对应应用。</p>';
+}
+function quickNoteV35(){
+ var kind=window.prompt('想记什么？输入“体重 67.2”或“灵光：...”','灵光：记忆应该可查看、可纠正');if(!kind)return;
+ var m=kind.match(/体重\\s*([0-9.]+)/);if(m)ps().records.push({id:'weight-'+Date.now(),app:'weight',section:'self',date:DEMO_DAY,title:'随口记录体重',values:[Number(m[1])],note:'来自个人看板随口记',sample:false});
+ else ps().v35.kb.unshift({id:'kb-'+Date.now(),type:'ai',title:kind.replace(/^灵光[:：]?\\s*/,''),meta:'灵光随记 · '+DEMO_DAY,tags:['灵光','随手记'],desc:'刚刚记下的想法，之后可归入项目或任务。'});
+ save();render();toast('已更新个人看板。');
+}
+function v35AppCard(a){
+ return '<button class="space-v35-app-card" onclick="openCustomAppV35(\\''+a.id+'\\')"><span class="space-v35-app-icon">'+icon(a.icon)+'</span><div><h3>'+esc(a.title)+'</h3><p>'+esc(a.desc)+'</p><div class="space-v35-progress"><i style="width:'+a.progress+'%"></i></div><small>'+a.status+' · 已完成 '+a.progress+'%</small></div><b>↗</b></button>';
+}
+function spaceAppsV35(){
+ var apps=ps().v35.apps;
+ return '<div class="space-v35-intro"><span>BUILT AROUND YOUR LIFE</span><h1>需要什么，<br>就长出什么。</h1><p>婚礼、出行、学习或一个临时项目，都可以成为一套专属的小应用。</p></div>'+v35Section('ON DEMAND','个性化应用','<button class="space-v35-action" onclick="buildCustomAppV35()">＋ 新建应用</button>')+'<div class="space-v35-app-list">'+apps.map(v35AppCard).join('')+'</div><div class="space-v35-create-card"><span>'+icon('plus')+'</span><div><b>按需构建自己的应用</b><p>告诉小天你要管理什么，它会帮你搭好清单、资料、预算和进度。</p></div><button onclick="buildCustomAppV35()">开始构建</button></div>';
+}
+function openCustomAppV35(id){
+ var a=ps().v35.apps.find(function(x){return x.id===id});if(!a)return;
+ var body='<div class="space-v35-app-detail"><div class="space-v35-app-detail-head"><span class="space-v35-app-icon">'+icon(a.icon)+'</span><div><h3>'+esc(a.title)+'</h3><p>'+esc(a.desc)+'</p></div></div><div class="space-v35-detail-stats"><span>进度 <b>'+a.progress+'%</b></span><span>预算 <b>'+esc(a.budget)+'</b></span></div><div class="space-v35-checklist">'+a.items.map(function(x,i){return '<label><input type="checkbox" '+(i<a.progress/30?'checked':'')+' onchange="toggleCustomItemV35(\\''+a.id+'\\','+i+',this.checked)"><span>'+esc(x)+'</span></label>';}).join('')+'</div><button class="primary wide" onclick="addCustomItemV35(\\''+a.id+'\\')">＋ 添加一项</button></div>';
+ sheet(a.title,body);
+}
+function toggleCustomItemV35(id,i,checked){var a=ps().v35.apps.find(function(x){return x.id===id});if(!a)return;a.progress=Math.max(0,Math.min(100,a.progress+(checked?8:-8)));save();}
+function addCustomItemV35(id){var a=ps().v35.apps.find(function(x){return x.id===id});if(!a)return;var v=window.prompt('添加到'+a.title,'补充一项');if(!v)return;a.items.push(v);save();openCustomAppV35(id);toast('已添加到'+a.title+'。');}
+function buildCustomAppV35(){var title=window.prompt('想构建什么应用？','家庭年度旅行');if(!title)return;ps().v35.apps.push({id:'app-'+Date.now(),title:title,icon:'pin',desc:'为你定制的生活项目应用。',status:'刚刚创建',progress:0,budget:'待补充',items:['明确目标','收集资料','安排下一步']});save();render();toast('已创建个性化应用。');}
+function spaceOverview(){
+ var p=ps().v35,records=ps().records,places=[].concat(new Set(records.map(function(r){return r.place;}).filter(Boolean)));
+ return '<div class="space-v35-hero"><div><span>PERSONAL SPACE · v35</span><h1>把生活交给自己，<br>把琐碎交给小天。</h1><p>知识有地方放，变化有地方看，需要什么就按需长出一个应用。</p></div><div class="space-v35-hero-orb">✳</div></div><div class="space-v35-overview-grid"><button onclick="setSpaceTab(\\'knowledge\\')"><span>'+icon('book')+'</span><b>个人知识库</b><p>链接、文档和 AI 产出，自动归到主题、项目和任务。</p><small>'+p.kb.length+' 条内容 · 进入查看 ↗</small></button><button onclick="setSpaceTab(\\'dashboard\\')"><span>'+icon('leaf')+'</span><b>个人看板</b><p>体重、血糖、足迹和灵光，点击图表进入个性化应用。</p><small>'+records.length+' 条记录 · 进入查看 ↗</small></button><button onclick="setSpaceTab(\\'apps\\')"><span>'+icon('plus')+'</span><b>个性化应用</b><p>婚礼、出行和临时项目，清单、资料、预算、进度放在一起。</p><small>'+p.apps.length+' 个应用 · 进入查看 ↗</small></button></div>'+v35Section('A LIFE THAT ADDS UP','最近发生的事','<button class="space-v35-action" onclick="setSpaceTab(\\'dashboard\\')">打开看板 →</button>')+'<div class="space-v35-recent">'+records.slice().sort(function(a,b){return (b.date+(b.time||'')).localeCompare(a.date+(a.time||''));}).slice(0,4).map(function(r){return '<button onclick="openSpaceRecord(\\''+r.id+'\\')"><time>'+spaceDate(r.date)+(r.time?' · '+r.time:'')+'</time><b>'+esc(r.title)+'</b><small>'+esc(r.note||'示例记录')+'</small></button>';}).join('')+'</div><p class="space-v35-caption">当前展示为公开示例数据，可以编辑、补记或替换。</p>';
+}
+function personalSpace(){
+ initPersonalSpace();
+ var body={overview:spaceOverview,knowledge:spaceKnowledgeV35,dashboard:spaceDashboardV35,apps:spaceAppsV35}[ps().tab]||spaceOverview;
+ return '<div class="personal-space personal-space-v35">'+spaceTabs()+body()+'</div>';
+}
